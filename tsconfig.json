@@ -36,7 +36,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/(app)/(home)/components/search-filters/components/category-dropdow/index.tsx"  ],
   "exclude": [
     "node_modules"
   ]
