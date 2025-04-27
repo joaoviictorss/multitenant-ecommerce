@@ -28,9 +28,13 @@ const CategoryDropDown = ({
     setIsOpen(false);
   };
 
-  const dropdownPosition = getDropdownPosition();
+  // const toggleDropdown = () => {
+  //   if (category.subcategories?.docs?.length) {
+  //     setIsOpen(!isOpen);
+  //   }
+  // }
 
-  console.log(dropdownPosition);
+  const dropdownPosition = getDropdownPosition();
 
   const layoutProps = {
     category,
@@ -41,6 +45,7 @@ const CategoryDropDown = ({
     onMouseLeave,
     dropdownPosition,
     isOpen,
+    // toggleDropdown,
     ...rest,
   };
 

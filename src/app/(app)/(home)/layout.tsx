@@ -24,6 +24,7 @@ const Layout = async ({ children }: ILayoutProps) => {
       },
     },
     pagination: false,
+    sort: "slug"
   });
 
   const formattedData = data.docs.map((doc) => ({

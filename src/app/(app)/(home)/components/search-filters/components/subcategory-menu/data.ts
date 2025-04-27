@@ -1,7 +1,7 @@
-import { Category } from "@/payload-types";
+import { CustomCategory } from "@/app/(app)/(home)/types/data";
 
 export interface SubcategoryMenuProps {
-  category: Category;
+  category: CustomCategory;
   isOpen: boolean;
   position: {top: number, left: number};
 }

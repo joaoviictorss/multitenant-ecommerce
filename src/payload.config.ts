@@ -23,12 +23,12 @@ export default buildConfig({
   },
   collections: [Users, Media, Categories],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: "594497da8e6139c9955e9984",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || "",
+    url: "mongodb+srv://joao:123123_@bazar.ielxl.mongodb.net/bazar?retryWrites=true&w=majority&appName=Bazar",
   }),
   sharp,
   plugins: [

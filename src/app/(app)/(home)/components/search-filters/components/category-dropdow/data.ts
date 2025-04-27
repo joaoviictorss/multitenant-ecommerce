@@ -1,8 +1,8 @@
-import { Category } from "@/payload-types";
+import { CustomCategory } from "@/app/(app)/(home)/types/data";
 import { RefObject } from "react";
 
 export interface CategoryDropDownProps {
-  category: Category;
+  category: CustomCategory;
   isActive: boolean;
   isNavigationHovered: boolean;
 }
@@ -13,4 +13,5 @@ export interface CategoryDropdownData extends CategoryDropDownProps {
   dropdownPosition: {top: number, left: number};
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  // toggleDropdown: () => void;
 }
