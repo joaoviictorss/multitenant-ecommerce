@@ -6,17 +6,16 @@ import { ListFilterIcon, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 import { SearchInputProps } from "./data";
-import { CategoriesSidebar } from "../categoriesSidebar";
+import { CategoriesSidebar } from "../categories-sidebar";
 import { Button } from "@/components/ui/button";
 
-const SearchInput = ({ disabled, data }: SearchInputProps) => {
+const SearchInput = ({ disabled }: SearchInputProps) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
   return (
     <div className="flex items-center gap-2 w-full">
       <div className="relative w-full">
         <CategoriesSidebar
-          data={data}
           isOpen={isOpenSidebar}
           onOpenChange={setIsOpenSidebar}
         />

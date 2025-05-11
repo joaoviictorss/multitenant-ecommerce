@@ -1,45 +1,29 @@
-import configPromise from "@payload-config";
-import { getPayload } from "payload";
-
 import { Footer } from "./components/footer";
 import { Navbar } from "./components/navbar";
-import { SearchFilters } from "./components/search-filters";
-import { Category } from "@/payload-types";
+import {
+  SearchFilters,
+  SearchFiltersSuspense,
+} from "./components/search-filters";
+import { getQueryClient, trpc } from "@/trpc/server";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Suspense } from "react";
 
 interface ILayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = async ({ children }: ILayoutProps) => {
-  const payload = await getPayload({
-    config: configPromise,
-  });
-
-  const data = await payload.find({
-    collection: "categories",
-    depth: 1, // populates the subcategories field
-    where: {
-      parent: {
-        exists: false,
-      },
-    },
-    pagination: false,
-    sort: "slug"
-  });
-
-  const formattedData = data.docs.map((doc) => ({
-    ...doc,
-    subcategories: (doc.subcategories?.docs ?? []).map((doc) => ({
-      // Se eu passar depth: 1 no find, o payload retorna o subcategories como um array de categorias, se eu passar depth: 0, o payload retorna o subcategories como um array de strings. Como o payload nao consegue diferenciar os tipos de acordo com o depth, eu preciso fazer isso manualmente
-      ...(doc as Category),
-      subcategories: undefined,
-    })),
-  }));
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery(trpc.categories.getMany.queryOptions());
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <SearchFilters data={formattedData} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Suspense fallback={<SearchFiltersSuspense />}>
+          <SearchFilters />
+        </Suspense>
+      </HydrationBoundary>
       <div className="flex-1 bg-[#F4F4F0]">{children}</div>
       <Footer />
     </div>

@@ -1,5 +1,5 @@
-import { CustomCategory } from "@/app/(app)/(home)/types/data";
+import { CategoriesGetManyOutput } from "@/modules/categories/types";
 
 export interface CategoriesProps {
-  data: CustomCategory[];
+  data: CategoriesGetManyOutput;
 }

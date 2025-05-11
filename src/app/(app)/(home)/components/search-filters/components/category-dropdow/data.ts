@@ -1,8 +1,8 @@
-import { CustomCategory } from "@/app/(app)/(home)/types/data";
+import { CategoriesGetManyOutput } from "@/modules/categories/types";
 import { RefObject } from "react";
 
 export interface CategoryDropDownProps {
-  category: CustomCategory;
+  category: CategoriesGetManyOutput[1];
   isActive: boolean;
   isNavigationHovered: boolean;
 }
@@ -10,7 +10,7 @@ export interface CategoryDropDownProps {
 export interface CategoryDropdownData extends CategoryDropDownProps {
   dropdownRef: RefObject<HTMLDivElement | null>;
   isOpen: boolean;
-  dropdownPosition: {top: number, left: number};
+  dropdownPosition: { top: number; left: number };
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   // toggleDropdown: () => void;

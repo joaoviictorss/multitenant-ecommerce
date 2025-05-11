@@ -1,7 +1,3 @@
-import { CustomCategory } from "../../types/data";
-
-export interface SearchFiltersProps {
-  data: CustomCategory[];
-}
+export interface SearchFiltersProps {}
 
 export interface SearchFiltersData extends SearchFiltersProps {}

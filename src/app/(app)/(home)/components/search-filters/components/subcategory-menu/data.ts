@@ -1,7 +1,7 @@
-import { CustomCategory } from "@/app/(app)/(home)/types/data";
+import { CategoriesGetManyOutput } from "@/modules/categories/types";
 
 export interface SubcategoryMenuProps {
-  category: CustomCategory;
+  category: CategoriesGetManyOutput[1];
   isOpen: boolean;
-  position: {top: number, left: number};
+  position: { top: number; left: number };
 }

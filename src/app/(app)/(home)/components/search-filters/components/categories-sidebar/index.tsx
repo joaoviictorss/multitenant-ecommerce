@@ -9,21 +9,26 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { CategoriesSidebarProps } from "./data";
 import { useState } from "react";
-import { CustomCategory } from "@/app/(app)/(home)/types/data";
+
 import { ChevronLeftIcon, ChevronRight } from "lucide-react";
+import { useTRPC } from "@/trpc/client";
+import { useQuery } from "@tanstack/react-query";
+import { CategoriesGetManyOutput } from "@/modules/categories/types";
 
 const CategoriesSidebar = ({
   isOpen,
   onOpenChange,
-  data,
 }: CategoriesSidebarProps) => {
+  const trpc = useTRPC();
+  const { data } = useQuery(trpc.categories.getMany.queryOptions());
+
   const router = useRouter();
 
-  const [parentCategories, setParentCategories] = useState<
-    CustomCategory[] | null
+  const [parentCategories, setParentCategories] =
+    useState<CategoriesGetManyOutput | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<
+    CategoriesGetManyOutput[1] | null
   >(null);
-  const [selectedCategory, setSelectedCategory] =
-    useState<CustomCategory | null>(null);
 
   // Se a categoria selecionada tiver subcategorias, exibe as subcategorias do mesmo, se não, redireciona para a categoria selecionada
 
@@ -35,9 +40,9 @@ const CategoriesSidebar = ({
     onOpenChange(open);
   };
 
-  const handleCategoryClick = (category: CustomCategory) => {
+  const handleCategoryClick = (category: CategoriesGetManyOutput[1]) => {
     if (category.subcategories && category.subcategories?.length > 0) {
-      setParentCategories(category.subcategories as CustomCategory[]);
+      setParentCategories(category.subcategories as CategoriesGetManyOutput);
       setSelectedCategory(category);
     } else {
       if (parentCategories && selectedCategory) {
@@ -85,7 +90,7 @@ const CategoriesSidebar = ({
               Voltar
             </button>
           )}
-          {currentCategories.map((category) => (
+          {currentCategories?.map((category) => (
             <button
               onClick={() => handleCategoryClick(category)}
               className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center justify-between text-base font-medium cursor-pointer"

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { CategoryDropDown } from "../category-dropdow";
 import { Button } from "@/components/ui/button";
 import { CategoriesProps } from "./data";
-import { CategoriesSidebar } from "../categoriesSidebar";
+import { CategoriesSidebar } from "../categories-sidebar";
 
 const Categories = ({ data }: CategoriesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -66,7 +66,6 @@ const Categories = ({ data }: CategoriesProps) => {
       <CategoriesSidebar
         isOpen={isSidebarOpen}
         onOpenChange={setIsSidebarOpen}
-        data={data}
       />
 
       {/* Div invisivel para medir todos os itens */}
