@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
   const trpc = useTRPC();
-  const cateogries = useQuery(trpc.categories.getMany.queryOptions());
+  const { data } = useQuery(trpc.auth.session.queryOptions());
 
-  return <div>Home</div>;
+  return <div>{JSON.stringify(data, null, 2)}</div>;
 }
